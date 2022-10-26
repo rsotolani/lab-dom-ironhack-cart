@@ -51,7 +51,56 @@ function removeProduct(event) {
 // ITERATION 5
 
 function createProduct() {
-  //... your code goes here
+  console.log("criando produto");
+  
+  //capturar objetos do dom de novo produto
+  const newProduct = document.querySelector('.create-product');
+  console.log("produtos: ", newProduct);
+
+  const productName = newProduct.querySelector('#product-name').value;
+  const productPrice = newProduct.querySelector('#product-price').value;  
+
+  //capturar tabela dos produtos existentes
+  const product = document.querySelector('#tbody');
+
+  const tr = document.createElement('tr');
+  tr.classList.add("product");
+  product.appendChild(tr);
+  const row = `
+    <td class="name">
+      <span>${productName}</span>
+    </td>
+    <td class="price">$<span>${productPrice}</span></td>
+    <td class="quantity">
+      <input type="number" value="0" min="0" placeholder="Quantity" />
+    </td>
+    <td class="subtotal">$<span>0</span></td>
+    <td class="action">
+      <button class="btn btn-remove">Remove</button>
+    </td>
+    `
+    tr.innerHTML = row;
+
+    const btnArr = document.querySelectorAll('.btn-remove');
+    console.log(btnArr);
+    btnArr.forEach( (el) => {
+      el.addEventListener('click',removeProduct);
+    });
+
+    // const fragment = document.createDocumentFragment();
+  // const tr = fragment
+  //   .appendChild(document.createElement('td'))
+  //   .appendChild(document.createElement('span'))
+  // tr.textContent = productName.value;
+
+  // product.appendChild(fragment);
+  
+  // const tdName = product.createElement('td');
+  // tdName.textContent = productName.value;
+  // const tdPrice = product.createElement('td');
+  // tdPrice.textContent = productPrice.value;
+
+  
 }
 
 window.addEventListener('load', () => {
@@ -59,9 +108,14 @@ window.addEventListener('load', () => {
   calculatePricesBtn.addEventListener('click', calculateAll);
 
   const removeBtns = document.getElementsByClassName('btn btn-remove')
-  for (let i of removeBtns) {
-    i.addEventListener('click', removeProduct);
-  }
+   for (let i of removeBtns) {
+     i.addEventListener('click', removeProduct);
+   }
 
-  //... your code goes here
+  const createProductBtn = document.getElementById('create');
+  createProductBtn.addEventListener('click', createProduct);
+
+  
+
 });
+
