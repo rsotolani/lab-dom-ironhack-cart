@@ -57,8 +57,8 @@ function createProduct() {
   const newProduct = document.querySelector('.create-product');
   console.log("produtos: ", newProduct);
 
-  const productName = newProduct.querySelector('#product-name').value;
-  const productPrice = newProduct.querySelector('#product-price').value;  
+  const productName = newProduct.querySelector('#product-name');
+  const productPrice = newProduct.querySelector('#product-price');  
 
   //capturar tabela dos produtos existentes
   const product = document.querySelector('#tbody');
@@ -68,9 +68,9 @@ function createProduct() {
   product.appendChild(tr);
   const row = `
     <td class="name">
-      <span>${productName}</span>
+      <span>${productName.value}</span>
     </td>
-    <td class="price">$<span>${productPrice}</span></td>
+    <td class="price">$<span>${productPrice.value}</span></td>
     <td class="quantity">
       <input type="number" value="0" min="0" placeholder="Quantity" />
     </td>
@@ -81,17 +81,25 @@ function createProduct() {
     `
     tr.innerHTML = row;
 
+    productName.value = "";
+    productPrice.value = 0;
+
     const btnArr = document.querySelectorAll('.btn-remove');
     console.log(btnArr);
     btnArr.forEach( (el) => {
       el.addEventListener('click',removeProduct);
     });
 
-    // const fragment = document.createDocumentFragment();
-  // const tr = fragment
-  //   .appendChild(document.createElement('td'))
-  //   .appendChild(document.createElement('span'))
-  // tr.textContent = productName.value;
+
+
+  // const fragment = document.createDocumentFragment();
+  // const tr2 = fragment
+  //    .appendChild(document.createElement('tr'))
+  //    .appendChild(document.createElement('td'))
+  //    .appendChild(document.createElement('span'));
+  // tr2.textContent = productName.value;
+  // tr.classList.add("product");
+
 
   // product.appendChild(fragment);
   
